@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lucy Kates — Senior Product Designer (v2)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #111111;
+      --mid: #555555;
+      --light: #6b6b6b;
+      --rule: #e0e0e0;
+      --page: #ffffff;
+      --sidebar-bg: #f5f4f0;
+      --orange: #F47A3A;
+    }
+
+    html { font-size: 15px; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: #f0efeb;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem 5rem;
+      min-height: 100vh;
+    }
+
+    .pill-nav {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pill-nav a {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-decoration: none;
+      padding: 0.4rem 1.1rem;
+      border-radius: 999px;
+      border: 1.5px solid #111111;
+      color: #111111;
+      background: transparent;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .pill-nav a.active { background: #111111; color: white; }
+    .pill-nav a:hover:not(.active) { background: rgba(0,0,0,0.06); }
+    @media print { .pill-nav { display: none; } }
+
+    .page {
+      background: var(--page);
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.07);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--sidebar-bg);
+      padding: 56px 32px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .sidebar-name h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 2.4rem;
+      line-height: 0.95;
+      letter-spacing: -1px;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .sidebar-name .title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light);
+    }
+
+    .sidebar-wave {
+      width: 100%;
+      height: 16px;
+      background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='16'><path d='M0 8 C7 2.4 13 2.4 20 8 C27 13.6 33 13.6 40 8' stroke='%23F47A3A' stroke-width='2' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: repeat-x;
+      background-position: 0 0;
+    }
+
+    .sidebar-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink);
+      margin-bottom: 0.8rem;
+    }
+
+    .sidebar-section ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .sidebar-section ul li {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--mid);
+      padding-left: 12px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .sidebar-section ul li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--orange);
+      font-weight: 700;
+      font-size: 0.7rem;
+    }
+
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--mid);
+      text-decoration: none;
+      line-height: 1.5;
+      display: block;
+    }
+
+    .contact-list a:hover { color: var(--ink); }
+
+    /* ── MAIN ── */
+    .main {
+      padding: 56px 48px 48px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .summary {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--ink);
+      max-width: 560px;
+    }
+
+    /* ── SECTION ── */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 1rem;
+    }
+
+    .company { margin-bottom: 1.5rem; }
+    .company:last-child { margin-bottom: 0; }
+
+    .company-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .company-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--ink);
+      letter-spacing: -0.3px;
+    }
+
+    .role {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      padding-top: 0.6rem;
+    }
+
+    .role:first-of-type { padding-top: 0; }
+
+    .role-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .role-dates {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--light);
+      white-space: nowrap;
+      padding-top: 0.1rem;
+    }
+
+    .role-bullets {
+      list-style: none;
+      margin: 0.4rem 0 0.6rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .role-bullets li {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.6;
+      padding-left: 12px;
+      position: relative;
+    }
+
+    .role-bullets li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.7rem;
+    }
+
+    .role-bullets li a { color: inherit; text-decoration: underline; }
+
+    .edu-entry {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .edu-school {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .edu-detail {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 300;
+      color: var(--mid);
+      margin-top: 0.2rem;
+    }
+
+    .edu-year {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--light);
+    }
+
+    @media print {
+      @page { size: letter; margin: 0; }
+      body { background: white; padding: 0; }
+      .page { box-shadow: none; border-radius: 0; max-width: 100%; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="pill-nav">
+    <a href="index-v1.html">Concept 1</a>
+    <a href="index-v2.html" class="active">Concept 2</a>
+    <a href="index.html">Concept 3</a>
+  </nav>
+  <div class="page">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-name">
+        <h1>Lucy Kates</h1>
+        <p class="title">Senior Product Designer</p>
+      </div>
+
+      <div class="sidebar-wave"></div>
+
+      <div class="sidebar-section">
+        <h2>Contact</h2>
+        <div class="contact-list">
+          <a href="mailto:lucyrkates@gmail.com">lucyrkates@gmail.com</a>
+          <a href="https://linkedin.com/in/lucyrkates" target="_blank">linkedin.com/in/lucyrkates</a>
+          <span>Berkeley, CA</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <h2>Skills</h2>
+        <ul>
+          <li>Product design strategy</li>
+          <li>Interaction design</li>
+          <li>Design systems</li>
+          <li>User research</li>
+          <li>Prototyping</li>
+          <li>Cross-functional leadership</li>
+          <li>AI/UX</li>
+          <li>Figma</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <p class="summary">I'm a senior product designer with 6+ years of experience, currently at LinkedIn designing how members present their full professional identity. Previously I've worked on conversational agents and enterprise sales tools. I bring systems thinking to ambiguous problems and prioritize design that's equitable and human-centered.</p>
+
+      <section>
+        <p class="section-label">Experience</p>
+
+        <div class="company">
+          <div class="company-header">
+            <span class="company-name">LinkedIn</span>
+          </div>
+
+          <div class="role">
+            <div><div class="role-title">Senior Product Designer</div></div>
+            <div class="role-dates">Oct 2023 – Present</div>
+          </div>
+          <ul class="role-bullets">
+            <li>Led design for integrating third-party apps onto the LinkedIn profile, allowing members to surface real projects, videos, and articles. The work spanned partners from GitHub to TikTok and established a scalable pattern for how external content shows up on LinkedIn.</li>
+            <li>Contributed to a 6-month venture bet exploring AI-native collaboration, defining UX paradigms for working alongside intelligent agents. Work influenced continued investment in the space across LinkedIn and Microsoft.</li>
+          </ul>
+
+          <div class="role">
+            <div><div class="role-title">Product Designer</div></div>
+            <div class="role-dates">Sep 2020 – Oct 2023</div>
+          </div>
+          <ul class="role-bullets">
+            <li>Designed core workflows and features for Sales Navigator, including <a href="https://www.linkedin.com/business/sales/blog/product-updates/relationship-map-sales-navigator-what-it-is-and-how-to-use-it" target="_blank">Relationship Map</a> — a collaborative account mapping tool that helps sellers visualize buying committees, track stakeholder changes, and identify growth opportunities using real-time LinkedIn data.</li>
+            <li>Developed reusable components for the Sales Solutions design system, improving pattern consistency across the org.</li>
+          </ul>
+        </div>
+
+        <div class="company">
+          <div class="company-header">
+            <span class="company-name">Uber</span>
+          </div>
+
+          <div class="role">
+            <div><div class="role-title">Contract Product Designer</div></div>
+            <div class="role-dates">Jan – Apr 2020</div>
+          </div>
+          <ul class="role-bullets">
+            <li>Designed visual affordances for Uber's product selection screen to improve ride option discoverability, grounded in data showing only 10% of riders scrolled the full product list.</li>
+            <li>Designed UX for Business Hub, a centralized destination for business riders to manage profiles, benefits, and expense integrations.</li>
+          </ul>
+
+          <div class="role">
+            <div><div class="role-title">Product Design Intern</div></div>
+            <div class="role-dates">May – Aug 2019</div>
+          </div>
+          <ul class="role-bullets">
+            <li>Redesigned the Flexible Cancellations benefit experience for Uber Rewards Gold members, improving awareness and comprehension across the full cancellation-to-rebook flow.</li>
+            <li>Explored UX for UberX Diamond, a new ride tier for high-value members, navigating tradeoffs between product differentiation and booking flow friction.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <p class="section-label">Education</p>
+        <div class="edu-entry">
+          <div>
+            <div class="edu-school">Georgia Institute of Technology</div>
+            <div class="edu-detail">B.S. Industrial Design · Highest Honors</div>
+          </div>
+          <div class="edu-year">2020</div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

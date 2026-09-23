@@ -274,10 +274,11 @@
 
     @media print {
       @page { size: letter; margin: 0; }
-      body { background: white; padding: 0; }
+      body { background: white; padding: 0; min-height: 0; }
       .pill-nav { display: none; }
       .download-btn { display: none; }
-      .page { box-shadow: none; border-radius: 0; max-width: 100%; width: 100%; padding: 40px 60px; }
+      .page { box-shadow: none; border-radius: 0; max-width: 100%; width: 100%; padding: 32px 60px; }
+      .page-footer { margin-top: 1rem; padding-top: 0; }
     }
   </style>
 </head>
@@ -330,10 +331,14 @@
           <div class="company-name">Uber</div>
           <div class="company-dates-summary">May 2019 – May 2020</div>
 
-          <div class="role-title">Product Design Intern</div>
+          <div class="role-title">Contract Product Designer <span class="role-dates">· Jan 2020 – May 2020</span></div>
           <ul class="role-bullets">
-            <li>Designed visual affordances for Uber's product selection screen to improve ride option discoverability, grounded in data showing only 10% of riders scrolled the full product list.</li>
-            <li>Designed UX for Business Hub, a centralized destination for business riders to manage profiles, benefits, and expense integrations, and redesigned the Flexible Cancellations benefit experience for Uber Rewards Gold members.</li>
+            <li>Improved Uber's product selection screen to make more ride options visible, after data showed only 10% of riders scrolled the full list. Explored scroll affordances, motion design, and accessibility, then aligned PM, design, and engineering on a final solution.</li>
+          </ul>
+
+          <div class="role-title">Product Design Intern <span class="role-dates">· May 2019 – Aug 2019</span></div>
+          <ul class="role-bullets">
+            <li>Redesigned the cancellation experience for Uber Rewards Gold members after research showed a third of riders didn't know they'd received their benefit. Improved how the benefit was communicated across the flow and presented the work to leadership.</li>
           </ul>
         </div>
       </div>
